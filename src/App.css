@@ -36,3 +36,47 @@
     transform: rotate(360deg);
   }
 }
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+}
+
+.state:hover {
+  fill: white;
+}
+
+/* .slider-board div span, .slider-board div div {
+  background-color: white;
+  color: black;
+  box-shadow: none;
+  border-radius: 0;
+} */
+/* 
+.btn-new-game button {
+  display: none
+}
+
+.socialLinks{
+  transition:all .3s;
+}
+.socialLinks:hover{
+  color:rgb(40, 40, 40);
+  transform:scale(1.1);
+}
+.closeButton{
+  transition: all .3s;
+}
+.closeButton:hover{
+  color:#000;
+  background:#fff;
+}
+
+#usamap {
+  box-shadow: 5px 5px 10px rgba(0,0,0,.4)
+} */
