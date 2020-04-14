@@ -381,7 +381,7 @@ class App extends Component {
 
   state = {
 
-    currentWindow: 2,
+    currentWindow: 0,
     // 0 = Welcome
     // 1 = Merch
     // 2 = Main game
