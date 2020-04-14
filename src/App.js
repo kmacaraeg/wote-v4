@@ -160,7 +160,9 @@ const ModalButton = styled.div`
   padding: 20px;
   cursor: pointer;
   z-index: 400;
+  // color: ${props => props.theme.pink};
   color: white;
+  font-weight: bold;
 
 `
 
@@ -567,9 +569,9 @@ class App extends Component {
       <Router>
         <ReactTooltip data-border={false} />
         <CornerLogo onClick={()=>{this.setState({currentWindow: 1})}}></CornerLogo>
-        <ModalButton onClick={() => {
+        <ModalButton  theme={this.state.theme} onClick={() => {
           this.setState({ modalShown: !this.state.modalShown })
-        }}>Menu</ModalButton>
+        }}>MENU</ModalButton>
         {this.checkModal()}
         <Switch>
           <Route path="/">
