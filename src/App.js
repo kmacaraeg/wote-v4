@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import Crossword from "react-crossword";
 // import Slider from "react-slider-game";
 import HamburgerMenu from "react-hamburger-menu";
+import crosswordData from "./components/data/crosswordLA"
 
 // import tourStops from './components/data/tourStops.jsx';
 // import mapVector from './components/mapVector';
@@ -17,7 +18,7 @@ import HamburgerMenu from "react-hamburger-menu";
 import Iframe from 'react-iframe';
 import anime from 'animejs/lib/anime.es.js';
 import ReactTooltip from 'react-tooltip'
-// import SlidingTilePuzzle from 'react-sliding-tile-puzzle';
+import SlidingTilePuzzle from 'react-sliding-tile-puzzle';
 
 // import Display from "./components/Display"
 import mapVector from './components/mapVector';
@@ -28,7 +29,8 @@ const Display = styled.div`
 
   height: 100vh;
   width: 100vw;
-  background-color: ${props => props.theme.green};
+  background: url(img/background.jpg);
+  background-size: cover;
 
 `
 
@@ -36,21 +38,28 @@ const Welcome = styled.div`
 
   .welcome-container {
     background-color: white;
-    // height: 500px;
-    // width: 500px;
+    height: 300px;
+    // width: 660px;
     padding: 50px;
     flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid ${props => props.theme.pink};
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
   }
 
   .welcome-logo {
-    background-color: lightgray;
-    height: 200px;
-    width: 200px;
+    background: url(img/logo.png);
+    height: 100px;
+    width: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .welcome-copy {
     margin-top: 30px;
     max-width: 400px;
+    margin-bottom: 10px;
 
     p {
       margin: 0;
@@ -58,11 +67,23 @@ const Welcome = styled.div`
   }
 
   .welcome-enterbutton {
-    margin: 10px;
-    background-color: ${props => props.theme.green};
-    padding: 10px;
+    margin: 20px 20px 0 20px;
+    background-color: ${props => props.theme.pink};
+    border: 2px solid ${props => props.theme.pink};
+    color: white;
+    border-radius: 10px;
+    padding: 10px 14px;
     cursor: pointer;
+    transition: .2s ease;
   }
+
+  .welcome-enterbutton:hover {
+    background-color: white;
+    color: ${props => props.theme.pink};
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
 
 `
 
@@ -74,6 +95,9 @@ const Merch = styled.div`
     // width: 500px;
     padding: 50px;
     flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid ${props => props.theme.pink};
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
   }
 
   .merch-thumbnails-container {
@@ -84,18 +108,17 @@ const Merch = styled.div`
   }
 
   .merch-thumbnail {
-    background-color: pink;
+    // background-color: pink;
     width: 200px;
     flex-direction: column;
     margin: 10px;
-    outline: 1px solid red;
     padding-bottom: 20px;
     cursor: pointer;
   }
   
   .merch-thumbnail-picture {
-    background-color: gray;
-    height: 200px;
+    background-color: lightgray;
+    height: 300px;
     width: 200px;
     margin-bottom: 10px;
   }
@@ -105,11 +128,21 @@ const Merch = styled.div`
   }
 
   .merch-enter-button {
-    margin: 10px;
-    background-color: ${props => props.theme.green};
-    padding: 10px;
+    margin: 20px 20px 0 20px;
+    background-color: ${props => props.theme.pink};
+    border: 2px solid ${props => props.theme.pink};
+    color: white;
+    border-radius: 10px;
+    padding: 10px 14px;
     cursor: pointer;
-    padding: 10px;
+    transition: .2s ease;
+  }
+
+  .merch-enter-button:hover {
+    background-color: white;
+    color: ${props => props.theme.pink};
+    margin-top: 15px;
+    margin-bottom: 5px;
   }
 `
 
@@ -127,6 +160,7 @@ const ModalButton = styled.div`
   padding: 20px;
   cursor: pointer;
   z-index: 400;
+  color: white;
 
 `
 
@@ -138,17 +172,22 @@ const Modal = styled.div`
   z-index: 300;
   background-color: rgba(0,0,0,.4);
   overflow: scroll;
+  display: block;
 
   .modal-container {
     flex-direction: column;
     margin-top: 100px;
-
+    margin-bottom: 100px;
   }
 
   .modal-list-container {
     flex-direction: column;
-    margin: 50px 0;
+    margin: 0;
     cursor: pointer;
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    z-index: 50;
   }
 
   .modal-list-item {
@@ -160,35 +199,39 @@ const Modal = styled.div`
   }
 
   .modal-list-item:hover {
-    color: white;
+    color: pink;
   }
 
+  .modal-spotify {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    border: none;
+    z-index: 50;
+  }
+
+  h1 {
+    background-color:${props => props.theme.pink};
+    color: white;
+    padding: 10px 60px;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+      box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+      z-index: 10;
+      margin-bottom: 0;
+  }
 
 `
 
 const GameRender = styled.div`
 
-  // height: 500px;
-  // width: 500px;
-  // background-color: red;
   flex-direction: column;
-
-  #states {
-    fill: blue;
-  }
-
-  .state {
-    stroke: 4px solid white;
-  }
-
-  #usamap {
-    width: 800px;
-  }
-
 
   .game-chooser {
     flex-wrap: wrap;
     width: 500px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+    z-index: 50;
   }
 
   .game-choice {
@@ -204,9 +247,26 @@ const GameRender = styled.div`
 
   .game-chooser-toolbar {
     height: 40px;
-    background-color: red;
-    width: 100%;
+    background-color:${props => props.theme.pink};
+    color: white;
+    width: 90%;
     cursor: pointer;
+    border-radius: 0 0 10px 10px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+        z-index: 10;
+  }
+
+  .game-instructions {
+    height: 40px;
+    background-color:${props => props.theme.pink};
+    color: white;
+    width: 90%;
+    border-radius: 10px 10px 0 0;
+      box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+      z-index: 10;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 20px;
   }
 
   .game-chooser-toolbar:hover {
@@ -214,65 +274,102 @@ const GameRender = styled.div`
   }
 
   .game-crossword {
-    width: 700px;
+    width: 1000px;
     background-color: white;
-    height: 400px;
+    height: 500px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+    z-index: 50;
+    color: black;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 2px;
   }
 
   .game-puzzle {
     width: 700px;
     background-color: white;
     height: 400px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+    z-index: 50;
   }
 
   .game-search {
     width: 700px;
     background-color: white;
     height: 400px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+    z-index: 50;
   }
 
   .game-draw {
     width: 700px;
     background-color: white;
     height: 400px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+    z-index: 50;
   }
+
+  .game-puzzle-text {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+  }
+`
+
+const CornerLogo = styled.div`
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100px;
+  width: 300px;
+  background: url(img/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+  }
+
 `
 
 const merchArray = [
   {
     name: "jacket",
     picture: "red",
-    description: "cool",
+    description: "info",
     link: "/"
   },
   {
     name: "shirt",
     picture: "blue",
-    description: "sick",
+    description: "info",
     link: "/"
   },
   {
-    name: "jacket",
+    name: "hat",
     picture: "red",
-    description: "cool",
+    description: "info",
     link: "/"
   },
   {
-    name: "shirt",
+    name: "cd",
     picture: "blue",
-    description: "sick",
+    description: "info",
     link: "/"
   },
   {
-    name: "jacket",
+    name: "socks",
     picture: "red",
-    description: "cool",
+    description: "info",
     link: "/"
   },
   {
-    name: "shirt",
+    name: "watch",
     picture: "blue",
-    description: "sick",
+    description: "info",
     link: "/"
   }
 ]
@@ -282,7 +379,7 @@ class App extends Component {
 
   state = {
 
-    currentWindow: 0,
+    currentWindow: 2,
     // 0 = Welcome
     // 1 = Merch
     // 2 = Main game
@@ -329,11 +426,10 @@ class App extends Component {
     this.setState({ currentDate: newDate });
     this.setState({ currentData: newData });
     this.setState({ currentData2: newData2 });
-    console.log("previous game " + this.state.currentGame);
 
+    console.log("previous game " + this.state.currentGame);
     console.log(typeof (this.state.completedGames))
     console.log(this.state.completedGames)
-
 
     if (playedColoring === true && playedPuzzle === true && playedWaldo === true && playedCrossword === true && count === 24) {
       this.setState({ gameState: 1 });
@@ -348,18 +444,28 @@ class App extends Component {
 
   checkModal() {
     if (this.state.modalShown == true) {
-      return <Modal>
+      return <Modal theme={this.state.theme}>
         <div className="modal-container">
           <h1>Tour Dates</h1>
           <div className="modal-list-container" onClick={() => {
           }}>
             {tourStops.map((x, i) => (
               <div className="modal-list-item">
-                <h3>{x.date}</h3>
-                <h3>{x.city}, {x.state}</h3>
+                                  <h3>{x.date}</h3>
+                <a href="https://www.bandsintown.com/a/158776-walk-off-the-earth?came_from=242" >
+
+                  <h3>{x.city}, {x.state}</h3>
+                </a>
               </div>
             ))}
           </div>
+        </div>
+        <div className="modal-container">
+        <h1>Music</h1>
+        <Iframe className="iframe modal-spotify" url="https://open.spotify.com/embed/album/02TmceYFis4XKcjCZ86eBP" width="500px" height="400px" border="none"></Iframe>
+        </div>
+        <div className="modal-container">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdczIih8EqO1aHjaMqnLk-u-tkMMg3kbrJ0Lloavz4Ae4YQFQ/viewform?embedded=true" width="640" height="1171" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
       </Modal>
     }
@@ -376,11 +482,23 @@ class App extends Component {
           <div className="game-choice" onClick={() => { this.setState({ currentGame: "draw" }) }}>Draw</div>
         </div>
       case "crossword":
-        return <div className="game-crossword">crossword</div>
+        return <div className="game-crossword"><Crossword data={crosswordData}></Crossword></div>
         case "puzzle":
-            return <div className="game-puzzle">puzzle</div>
-      case "search":
-        return <div className="game-search">search</div>
+            return <div className="game-puzzle">
+            <div className="game-puzzle-text">
+              <h1>Solve the Puzzle!</h1>
+              <p>What is going on? Click to move the tiles and solve the puzzle!</p>
+            </div>
+            <div className="sliderParts">
+            <SlidingTilePuzzle
+          maxIterations={300}
+          image={"img/Waldo_OG.jpg"}
+          size={400}
+        />
+            </div>
+        </div>
+      // case "search":
+      //   return  <CompareImgInput className="compareImageInput" data={"test"} rightImage={"img/waldo_1"} />
 
       case "draw":
         return <div className="game-draw">draw</div>
@@ -388,11 +506,17 @@ class App extends Component {
 
   }
 
+  renderToolbar() {
+    if(this.state.currentGame!=="home"){
+      return <div className="game-chooser-toolbar" onClick={() => { this.setState({ currentGame: "home" })}}>back home</div>
+    }
+  }
+
   readCurrentWindow = (x) => {
 
     switch (x) {
       case 0:
-        return <Welcome>
+        return <Welcome theme={this.state.theme}>
           <div className="welcome-container">
             <div className="welcome-logo"></div>
             <div className="welcome-copy">
@@ -401,7 +525,7 @@ class App extends Component {
                 </p>
             </div>
             <div className="welcome-enterbutton" onClick={() => { this.setState({ currentWindow: 1 }) }}>
-              enter
+              Here we go!
               </div>
           </div>
         </Welcome>
@@ -421,17 +545,17 @@ class App extends Component {
               }
             </div>
             <div className="merch-enter-button" onClick={() => { this.setState({ currentWindow: 2 }) }}>
-              enter
+              Go to the games!
             </div>
 
           </div>
         </Merch>
       case 2:
         return <MainGame theme={this.state.theme}>
-          <GameRender>
-            <div className="game-chooser-toolbar" onClick={() => { this.setState({ currentGame: "home" })}}>
-            back home</div>
+          <GameRender theme={this.state.theme}>
+            <div className="game-instructions">Here we go!</div>
             {this.renderGame()}
+            {this.renderToolbar()}
           </GameRender>
 
         </MainGame>
@@ -442,9 +566,10 @@ class App extends Component {
     return (
       <Router>
         <ReactTooltip data-border={false} />
+        <CornerLogo onClick={()=>{this.setState({currentWindow: 1})}}></CornerLogo>
         <ModalButton onClick={() => {
           this.setState({ modalShown: !this.state.modalShown })
-        }}>menu</ModalButton>
+        }}>Menu</ModalButton>
         {this.checkModal()}
         <Switch>
           <Route path="/">
