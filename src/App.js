@@ -451,7 +451,6 @@ const CornerLogo = styled.div`
     display: none;
   }
 
-
 `
 
 const merchArray = [
@@ -477,10 +476,6 @@ const merchArray = [
   },
   {
     picture: "img/merch_6.png",
-    link: "/"
-  },
-  {
-    picture: "img/merch_7.png",
     link: "/"
   },
 ]
