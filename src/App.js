@@ -42,15 +42,15 @@ const Display = styled.div`
 const MobileDisplay = styled.div`
 
 display: none;
-@media (min-width: 1000px) {
+@media (max-width: 1000px) {
   display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
-height: 100vh;
-width: 100vw;
+
 background: url(img/background.jpg);
 background-size: cover;
-display: flex;
 
 `
 
@@ -214,8 +214,8 @@ const Modal = styled.div`
   display: block;
 
   @media (min-width: 1000px) {
-height: 100%;
-width: 100%;
+    height: 100%;
+    width: 100%;
   }
 
   .modal-container {
@@ -244,6 +244,7 @@ width: 100%;
     @media (max-width: 1000px) {
       padding: 0px;
       width: 100%;
+      overflow: hidden;
       // display: none;
     }
     
@@ -256,8 +257,10 @@ width: 100%;
     padding-bottom: 10px;
     margin-bottom: 10px;
     @media (max-width: 1000px) {
-      width: 100%;
+      width: auto;
       margin: 20px;
+      overflow: hidden;
+      border-bottom: none;
     }
   }
 
@@ -273,6 +276,10 @@ width: 100%;
     z-index: 50;
     border-radius: 10px;
     border: 2px solid ${props => props.theme.pink};
+    @media (max-width: 1000px) {
+      width: 100%;
+      padding: 10px;
+    }
   }
 
   h1 {
@@ -289,6 +296,19 @@ width: 100%;
   .freebirdFormviewerViewItemsItemItem {
     border-radius: 10px;
     border: 2px solid ${props => props.theme.pink};
+  }
+
+  .mobile-welcome{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid ${props => props.theme.pink};
+    display: flex;
+    flex-direction column;
+    img {
+      width: 300px;
+    }
+    padding: 40px 0;
   }
 
 `
@@ -743,74 +763,82 @@ class App extends Component {
                 />
               </div>
               {this.renderToolbar()}
-              </div>
-              </GameRender>
+            </div>
+          </GameRender>
 
         </MainGame>
 
-          case 3:
-                  return <MainGame theme={this.state.theme}>
-            <GameRender theme={this.state.theme}>
-              <div className="game-instructions">Here we go!</div>
-              {this.renderGame()}
-              {this.renderToolbar()}
-            </GameRender>
+      case 3:
+        return <MainGame theme={this.state.theme}>
+          <GameRender theme={this.state.theme}>
+            <div className="game-instructions">Here we go!</div>
+            {this.renderGame()}
+            {this.renderToolbar()}
+          </GameRender>
 
-          </MainGame>
-          case 50:
-          return <MainGame theme={this.state.theme}>
-            <GameRender theme={this.state.theme}>
-              <Crossword style={{ display: "block" }} className="game-crossword" data={crosswordData2} />
-            </GameRender>
-          </MainGame>
-          }
-        }
-      
+        </MainGame>
+      case 50:
+        return <MainGame theme={this.state.theme}>
+          <GameRender theme={this.state.theme}>
+            <Crossword style={{ display: "block" }} className="game-crossword" data={crosswordData2} />
+          </GameRender>
+        </MainGame>
+    }
+  }
+
   render() {
     return (
       <Router>
-            <ReactTooltip data-border={false} />
-            <CornerLogo data-tip="Merch Store" onClick={() => { this.setState({ currentWindow: 1 }) }}></CornerLogo>
-            <ModalButton theme={this.state.theme} onClick={() => {
-              this.setState({ modalShown: !this.state.modalShown })
-            }}>MENU</ModalButton>
-            {this.checkModal()}
-            <Switch>
-              <Route path="/">
-                <Display theme={this.state.theme} currentWindow={this.state.currentWindow}>
-                  {this.readCurrentWindow(this.state.currentWindow)}
-                </Display>
-                <MobileDisplay>
-                <Modal theme={this.state.theme}>
-        <div className="modal-container">
-          <h1>Tour Dates</h1>
-          <div className="modal-list-container" onClick={() => {
-          }}>
-            {tourStops.map((x, i) => (
-              <div className="modal-list-item">
-                <h3>{x.date}</h3>
-                <a href="https://www.bandsintown.com/a/158776-walk-off-the-earth?came_from=242" >
+        <ReactTooltip data-border={false} />
+        <CornerLogo data-tip="Merch Store" onClick={() => { this.setState({ currentWindow: 1 }) }}></CornerLogo>
+        <ModalButton theme={this.state.theme} onClick={() => {
+          this.setState({ modalShown: !this.state.modalShown })
+        }}>MENU</ModalButton>
+        {this.checkModal()}
+        <Switch>
+          <Route path="/">
+            <Display theme={this.state.theme} currentWindow={this.state.currentWindow}>
+              {this.readCurrentWindow(this.state.currentWindow)}
+            </Display>
+            <MobileDisplay>
+              <Modal theme={this.state.theme}>
+              <div className="modal-container">
+                <div className="mobile-welcome">
+                  <img src="img/logo.png"></img>
+                  <p>
+                    Here we go! Welcome to our site. Here is a personal message from us.
+                  </p>
+                </div>
+                </div>
+                <div className="modal-container">
+                  <h1>Tour Dates</h1>
+                  <div className="modal-list-container" onClick={() => {
+                  }}>
+                    {tourStops.map((x, i) => (
+                      <div className="modal-list-item">
+                        <h3>{x.date}</h3>
+                        <a href="https://www.bandsintown.com/a/158776-walk-off-the-earth?came_from=242" >
 
-                  <h3>{x.city}, {x.state}</h3>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="modal-container">
-          <h1>Music</h1>
-          <Iframe className="iframe modal-spotify" url="https://open.spotify.com/embed/album/02TmceYFis4XKcjCZ86eBP" width="500px" height="400px" border="none"></Iframe>
-        </div>
-        <div className="modal-container">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdczIih8EqO1aHjaMqnLk-u-tkMMg3kbrJ0Lloavz4Ae4YQFQ/viewform?embedded=true" width="640" height="1171" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        </div>
-      </Modal>
-                </MobileDisplay>
-              </Route>
-            </Switch>
-          </Router>
-          )
-        }
-      }
-      
-      export default App;
+                          <h3>{x.city}, {x.state}</h3>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="modal-container">
+                  <h1>Music</h1>
+                  <Iframe className="iframe modal-spotify" url="https://open.spotify.com/embed/album/02TmceYFis4XKcjCZ86eBP" width="200px" height="400px" border="none"></Iframe>
+                </div>
+                {/* <div className="modal-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdczIih8EqO1aHjaMqnLk-u-tkMMg3kbrJ0Lloavz4Ae4YQFQ/viewform?embedded=true" width="640" height="1171" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                  </div> */}
+              </Modal>
+            </MobileDisplay>
+          </Route>
+        </Switch>
+      </Router>
+    )
+  }
+}
+
+export default App;
